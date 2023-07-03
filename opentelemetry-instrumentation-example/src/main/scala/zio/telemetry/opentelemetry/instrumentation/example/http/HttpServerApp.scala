@@ -16,6 +16,8 @@ case class HttpServerApp(tracing: Tracing) {
   def health: UIO[Response] =
     for {
       _        <- tracing.addEvent("executing health logic")
+      ctx      <- tracing.getCurrentSpanContextUnsafe
+      _         = println(s"TraceID is ${ctx.getTraceId()}")
       _        <- tracing.setAttribute("zio", "telemetry")
       response <- ZIO.succeed(Response.ok)
     } yield response

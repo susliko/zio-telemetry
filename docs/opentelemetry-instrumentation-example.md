@@ -41,3 +41,10 @@ sbt -J-javaagent:$OTEL_AGENT_PATH \
  ```
 
 Head over to [http://localhost:16686/](http://localhost:16686/) to see the result.
+
+Running server with `.properties` config
+```bash
+sbt -J-javaagent:$OTEL_AGENT_PATH \
+    -J-Dotel.javaagent.configuration-file=./opentelemetry-instrumentation-example/src/main/resources/agent.properties \
+    "opentelemetryInstrumentationExample/runMain zio.telemetry.opentelemetry.instrumentation.example.ServerApp"
+```
